@@ -28,7 +28,7 @@ void setup(void) {
 int main(void) {
     setup();
     while(1) {
-        // Execute repeatedly forever and ever and ever and ever ...
+        
     }
     return 0;
 }
