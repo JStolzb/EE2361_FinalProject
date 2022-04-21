@@ -39,9 +39,10 @@ void init_button() {
     
 }
 //global variables
-extern volatile unsigned long int overflow = 0;
-extern volatile unsigned long int curPeriod = 0, validClick = 0, prevEdge = 0;
-extern volatile int numClicks = 0, isValidClick = 0;
+unsigned long int overflow;
+unsigned long int curPeriod, validClick, prevEdge;
+int numClick, isValidClick;
+
 void __attribute__((__interrupt__,__auto_psv__)) _T2Interrupt(void) {
     IFS0bits.T2IF = 0;
     overflow++;
