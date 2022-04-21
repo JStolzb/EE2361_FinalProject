@@ -8,6 +8,7 @@
 #include "string.h"
 #include "button_library.h"
 #include "lcd_library.h"
+#include "string.h"
 
 // CW1: FLASH CONFIGURATION WORD 1 (see PIC24 Family Reference Manual 24.1)
 #pragma config ICS = PGx1          // Comm Channel Select (Emulator EMUC1/EMUD1 pins are shared with PGC1/PGD1)
@@ -29,6 +30,9 @@ extern unsigned long int overflow;
 extern unsigned long int curPeriod, validClick, prevEdge;
 extern int numClick, isValidClick;
 
+
+
+
 int main(void) {
     pic24Init();
     init_button();
@@ -41,40 +45,45 @@ int main(void) {
     numClick = 0;
     isValidClick = 0;
     unsigned long int tempPeriod = 0, curEdge = 0;
+    
+    char letter[6];
+    int i = 0;
+    
     while(1) {
         if (isValidClick == 1) {
             isValidClick = 0;
             curEdge = (unsigned long int) (PR2 + 1 )*overflow + TMR2;
             curPeriod = curEdge - validClick; //update global var if greater than 2ms
-            validClick = curEdge;
+//            validClick = curEdge;
             numClick++;
             if (isFirstEdge == 1) {
                 isFirstEdge = 0;
             }
             else {
-                if (curPeriod < 11000) { //if less than .25s
-                    if (numClick == 3){
-                        lcd_print('2');
-                        numClick = 0;
-                        
-                    }
-                    if (numClick == 5) {
-                        lcd_print('3');
-                        numClick = 0;
-                    }
+                i++;
+                if (curPeriod < 44000) { //if less than 1 s
+                    //short click
+                    lcd_print('0');
+                    letter[i]  += '0';
+                    isFirstEdge = 0;
                 }
                 else {
-                    numClick = 0;
+                    //long click
+                    lcd_print('1');
+                    letter[i]  += '1';
+                    isFirstEdge = 0;
+                    
                 }
             }
+            validClick = curEdge;
         }
         if ((unsigned long int)(PR2 + 1) * overflow + TMR2 - validClick > 125000 ) {
-            lcd_print('0');
+            //end of letter
+            lcd_print('N');
             overflow = 0;
             TMR2 = 0;
             validClick = TMR2;
             prevEdge = TMR2;
-            numClick = 0;
             isValidClick = 0;
             isFirstEdge = 1;
         }
