@@ -27,8 +27,6 @@ void init_UART(void) {
     _TRISB10 = 1; // U1RX input
     
     U1MODE = 0;
-    //U1MODEbits.UARTEN = 1;  // enables UART1
-    //U1STAbits.UTXEN = 1;    // UART1 transmitter enable
     U1MODEbits.PDSEL = 0b00;    // 8-bit data, no parity
     U1MODEbits.STSEL = 0;   // 1 stop bit
     
@@ -55,33 +53,38 @@ void init_UART(void) {
     _U1TXIE = 1;    // enable UART TX interrupt
 }
 
-void hello_world(void) {    // prints "Hello World!\n" onto Adafruit app
-    U1TXREG = 'H';
-    delay_ms(100);
-    U1TXREG = 'e';
-    delay_ms(100);
-    U1TXREG = 'l';
-    delay_ms(100);
-    U1TXREG = 'l';
-    delay_ms(100);
-    U1TXREG = 'o';
-    delay_ms(100);
-    U1TXREG = ' ';
-    delay_ms(100);
-    U1TXREG = 'W';
-    delay_ms(100);
-    U1TXREG = 'o';
-    delay_ms(100);
-    U1TXREG = 'r';
-    delay_ms(100);
-    U1TXREG = 'l';
-    delay_ms(100);
-    U1TXREG = 'd';
-    delay_ms(100);
-    U1TXREG = '!';
-    delay_ms(1000);
-    U1TXREG = 0x0D;
-    U1TXREG = 0x0A;
+void sendChar(char c) {    // prints character to Adafruit app
+    U1TXREG = c;
 }
+
+void hello_world(void) {    // prints "Hello World!\n" onto Adafruit app
+    sendChar('H');
+    delay_ms(100);
+    sendChar('e');
+    delay_ms(100);
+    sendChar('l');
+    delay_ms(100);
+    sendChar('l');
+    delay_ms(100);
+    sendChar('o');
+    delay_ms(100);
+    sendChar(' ');
+    delay_ms(100);
+    sendChar('W');
+    delay_ms(100);
+    sendChar('o');
+    delay_ms(100);
+    sendChar('r');
+    delay_ms(100);
+    sendChar('l');
+    delay_ms(100);
+    sendChar('d');
+    delay_ms(100);
+    sendChar('!');
+    delay_ms(1000);
+    sendChar('\n');
+}
+
+
 
 
