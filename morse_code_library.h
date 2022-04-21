@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-
+char morseCodeLib(const char s[]);
 
 
 #ifdef	__cplusplus
