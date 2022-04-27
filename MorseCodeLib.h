@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-char morseCodeLib(char* s);
+char morseCodeLib(char s[]);
 
 
 #ifdef	__cplusplus

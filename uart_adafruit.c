@@ -1,15 +1,6 @@
-/* Configures UART with the PIC24 and Adafruit Bluefruit LE
- *
- * by: Devon Uram, Jack Smith, John Stolzberg-Shray, & Megan Adamek
- *
- * emails: uram0283@umn.edu, smi01223@umn.edu, stolz050@umn.edu, &
- *  adame473@umn.edu
- * 
- * date: 4/21/22
- */
 
 #include "xc.h"
-#include "uart_adafruit.h"
+#include "UART_Adafruit.h"
 
 void __attribute__((__interrupt__,__auto_psv__)) _U1TXInterrupt(void) {
     _U1TXIF = 0;
@@ -52,39 +43,3 @@ void init_UART(void) {
     
     _U1TXIE = 1;    // enable UART TX interrupt
 }
-
-void sendChar(char c) {    // prints character to Adafruit app
-    U1TXREG = c;
-}
-
-void hello_world(void) {    // prints "Hello World!\n" onto Adafruit app
-    sendChar('H');
-    delay_ms(100);
-    sendChar('e');
-    delay_ms(100);
-    sendChar('l');
-    delay_ms(100);
-    sendChar('l');
-    delay_ms(100);
-    sendChar('o');
-    delay_ms(100);
-    sendChar(' ');
-    delay_ms(100);
-    sendChar('W');
-    delay_ms(100);
-    sendChar('o');
-    delay_ms(100);
-    sendChar('r');
-    delay_ms(100);
-    sendChar('l');
-    delay_ms(100);
-    sendChar('d');
-    delay_ms(100);
-    sendChar('!');
-    delay_ms(1000);
-    sendChar('\n');
-}
-
-
-
-

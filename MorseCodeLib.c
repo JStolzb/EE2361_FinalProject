@@ -1,129 +1,125 @@
 #include "xc.h"
 #include "MorseCodeLib.h"
-#include "string.h"
 
-char morseCodeLib(void) {
+char morseCodeLib(const char s[]) {
     // Given an binary encoded morse character, this function will
     // return the associated character
     // This library handles A-Z, 0-9, and .,?
-    
-    extern char letter[6];
-    
-        if (letter == "01"){
+        if (s == "01"){
             return 'A';
         }
-        else if (letter == "1000"){
+        else if (s == "1000"){
             return 'B';
         }
-        else if (letter == "1010"){
+        else if (s == "1010"){
             return 'C';
         }
-        else if (letter == "100"){
+        else if (s == "100"){
             return 'D';
         }
-        else if (letter == "0"){
+        else if (s == "0"){
             return 'E';
         }
-        else if (letter == "0010"){
+        else if (s == "0010"){
             return 'F';
         }
-        else if (letter == "110"){
+        else if (s == "110"){
             return 'G';
         }
-        else if (letter == "0000"){
+        else if (s == "0000"){
             return 'H';
         }
-        else if (letter == "00"){
+        else if (s == "00"){
             return 'I';
         }
-        else if (letter == "0111"){
+        else if (s == "0111"){
             return 'J';
         }
-        else if (letter == "101"){
+        else if (s == "101"){
             return 'K';
         }
-        else if (letter == "0100"){
+        else if (s == "0100"){
             return 'L';
         }
-        else if (letter == "11"){
+        else if (s == "11"){
             return 'M';
         }
-        else if (letter == "10"){
+        else if (s == "10"){
             return 'N';
         }
-        else if (letter == "111"){
+        else if (s == "111"){
             return 'O';
         }
-        else if (letter == "0110"){
+        else if (s == "0110"){
             return 'P';
         }
-        else if (letter == "1101"){
+        else if (s == "1101"){
             return 'Q';
         }
-        else if (letter == "010"){
+        else if (s == "010"){
             return 'R';
         }
-        else if (letter == "000"){
+        else if (s == "000"){
             return 'S';
         }
-        else if (letter == "1"){
+        else if (s == "1"){
             return 'T';
         }
-        else if (letter == "001"){
+        else if (s == "001"){
             return 'U';
         }
-        else if (letter == "0001"){
+        else if (s == "0001"){
             return 'V';
         }
-        else if (letter == "011"){
+        else if (s == "011"){
             return 'W';
         }
-        else if (letter == "1001"){
+        else if (s == "1001"){
             return 'X';
         }
-        else if (letter == "1011"){
+        else if (s == "1011"){
             return 'Y';
         }
-        else if (letter == "1100"){
+        else if (s == "1100"){
             return 'Z';
         }
-        else if (letter == "0111"){
+        else if (s == "0111"){
             return '1';
         }
-        else if (letter == "00111"){
+        else if (s == "00111"){
             return '2';
         }
-        else if (letter == "00011"){
+        else if (s == "00011"){
             return '3';
         }
-        else if (letter == "00001"){
+        else if (s == "00001"){
             return '4';
         }
-        else if (letter == "00000"){
+        else if (s == "00000"){
             return '5';
         }
-        else if (letter == "10000"){
+        else if (s == "10000"){
             return '6';
         }
-        else if (letter == "11000"){
+        else if (s == "11000"){
             return '7';
         }
-        else if (letter == "11100"){
+        else if (s == "11100"){
             return '8';
         }
-        else if (letter == "11110"){
+        else if (s == "11110"){
             return '9';
         }
-        else if (letter == "11111N"){
+        else if (s == "11111"){
             return '0';
         }
-        else if (letter == "010101"){
+        else if (s == "010101"){
             return '.';
         }
-        else if (letter == "110011"){
+        else if (s == "110011"){
             return ',';
         }
-        else if (letter == "001100"){
+        else if (s == "001100"){
             return '?';
         }
 }
