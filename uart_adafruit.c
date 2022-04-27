@@ -43,3 +43,7 @@ void init_UART(void) {
     
     _U1TXIE = 1;    // enable UART TX interrupt
 }
+
+void sendChar(char c) {    // prints character to Adafruit app
+    U1TXREG = c;
+}
