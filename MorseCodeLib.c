@@ -1,12 +1,17 @@
 #include "xc.h"
+#include "string.h"
 #include "MorseCodeLib.h"
+#include "Button.h"
+#include "ButtonLibrary.h"
+#include "LCD_Lib.h"
+#include "UART_Adafruit.h"
 
-char morseCodeLib(const char s[]) {
+extern char letter[6];
+
+char morseCodeLib(void) {
     // Given an binary encoded morse character, this function will
     // return the associated character
     // This library handles A-Z, 0-9, and .,?
-    
-    extern char letter[6];
     
         if (letter == "01NNNN"){
             return 'A';
@@ -59,7 +64,7 @@ char morseCodeLib(const char s[]) {
         else if (letter == "1101NN"){
             return 'Q';
         }
-        else if (letter == "010NN"){
+        else if (letter == "010NNN"){
             return 'R';
         }
         else if (letter == "000NNN"){
@@ -113,16 +118,19 @@ char morseCodeLib(const char s[]) {
         else if (letter == "11110N"){
             return '9';
         }
-        else if (s == "11111N"){
+        else if (letter == "11111N"){
             return '0';
         }
-        else if (s == "010101"){
+        else if (letter == "010101"){
             return '.';
         }
-        else if (s == "110011"){
+        else if (letter == "110011"){
             return ',';
         }
-        else if (s == "001100"){
+        else if (letter == "001100"){
             return '?';
+        }
+        else{
+            return '#';
         }
 }

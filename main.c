@@ -40,10 +40,12 @@ int main(void) {
     char sendToBlu = '0';
     
     while(1){
-        
+        Nop();
         buttonWatch();
-        sendToBlu = morseCodeLib(letter);
-        sendToBlu = 'h';
+        Nop();
+        sendToBlu = morseCodeLib();
+        Nop();
+        //sendToBlu = 'h';
         lcd_setCursor(0,0);
         lcd_printChar(sendToBlu);
         
