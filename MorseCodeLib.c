@@ -1,8 +1,7 @@
 #include "xc.h"
 #include "MorseCodeLib.h"
-#include "string.h"
 
-char morseCodeLib(void) {
+char morseCodeLib(const char s[]) {
     // Given an binary encoded morse character, this function will
     // return the associated character
     // This library handles A-Z, 0-9, and .,?
@@ -114,16 +113,16 @@ char morseCodeLib(void) {
         else if (letter == "11110N"){
             return '9';
         }
-        else if (letter == "11111N"){
+        else if (s == "11111N"){
             return '0';
         }
-        else if (letter == "010101"){
+        else if (s == "010101"){
             return '.';
         }
-        else if (letter == "110011"){
+        else if (s == "110011"){
             return ',';
         }
-        else if (letter == "001100"){
+        else if (s == "001100"){
             return '?';
         }
 }

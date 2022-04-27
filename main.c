@@ -1,14 +1,11 @@
-/*
- * File:   main.c
- * Author: megad
- *
- * Created on April 14, 2022, 1:49 PM
- */
+
 #include "xc.h"
 #include "string.h"
-#include "button_library.h"
-#include "lcd_library.h"
-#include "string.h"
+#include "Button.h"
+#include "ButtonLibrary.h"
+#include "MorseCodeLib.h"
+#include "LCD_Lib.h"
+#include "UART_Adafruit.h"
 
 // CW1: FLASH CONFIGURATION WORD 1 (see PIC24 Family Reference Manual 24.1)
 #pragma config ICS = PGx1          // Comm Channel Select (Emulator EMUC1/EMUD1 pins are shared with PGC1/PGD1)
@@ -26,120 +23,34 @@
                                        // Fail-Safe Clock Monitor is enabled)
 #pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 
-extern unsigned long int overflow;
-extern unsigned long int curPeriod, validClick, prevEdge;
-extern int numClick, isValidClick;
 
+extern char letter[6];
 
-
+void pic24Init(void) { // initializes the PIC
+    _RCDIV = 0; // sets frequency of 16 MHz
+    AD1PCFG = 0x9fff;   // sets all pins digital
+}
 
 int main(void) {
     pic24Init();
     init_button();
     lcd_init();
-    int isFirstEdge = 1;
-    overflow = 0;
-    curPeriod = 0;
-    validClick = 0;
-    prevEdge = 0;
-    numClick = 0;
-    isValidClick = 0;
-    unsigned long int tempPeriod = 0, curEdge = 0;
+    init_UART();
     
-    char letter[6];
-    int i = 0;
+    char sendToBlu = '0';
     
-    while(1) {
-        if (isValidClick == 1) {
-            isValidClick = 0;
-            curEdge = (unsigned long int) (PR2 + 1 )*overflow + TMR2;
-            curPeriod = curEdge - validClick; //update global var if greater than 2ms
-//            validClick = curEdge;
-            numClick++;
-            if (isFirstEdge == 1) {
-                isFirstEdge = 0;
-            }
-            else {
-                i++;
-                if (curPeriod < 44000) { //if less than 1 s
-                    //short click
-                    lcd_print('0');
-                    letter[i]  += '0';
-                    isFirstEdge = 0;
-                }
-                else {
-                    //long click
-                    lcd_print('1');
-                    letter[i]  += '1';
-                    isFirstEdge = 0;
-                    
-                }
-            }
-            validClick = curEdge;
-        }
-        if ((unsigned long int)(PR2 + 1) * overflow + TMR2 - validClick > 125000 ) {
-            //end of letter
-            lcd_print('N');
-            overflow = 0;
-            TMR2 = 0;
-            validClick = TMR2;
-            prevEdge = TMR2;
-            isValidClick = 0;
-            isFirstEdge = 1;
-        }
+    while(1){
         
+        buttonWatch();
+        sendToBlu = morseCodeLib(letter);
+        sendToBlu = 'h';
+        lcd_setCursor(0,0);
+        lcd_printChar(sendToBlu);
+        
+        U1TXREG = sendToBlu;
+        delay_ms(1000);
+        U1TXREG = 0x0D;
+        U1TXREG = 0x0A;
     }
-//        if (isValidClick == 1) {
-//            isValidClick = 0;
-//            curEdge = (unsigned long int) (PR2 + 1 )*overflow + TMR2;
-//            curPeriod = curEdge - validClick; //update global var if greater than 2ms
-//            validClick = curEdge;
-//            numClick++;
-//            if (isFirstEdge == 1) {
-//                isFirstEdge = 0;
-//            }
-//            else {
-//                if (curPeriod < 11000) { //if less than .25s
-//                    if (numClick == 1){ //1 clicks
-//                        lcd_print('1');
-//                        numClick = 0; 
-//                    } 
-//                    if (numClick == 3){ //2 clicks
-//                        lcd_print('2');
-//                        numClick = 0; 
-//                    } 
-//                    if (numClick == 5){ //3 clicks
-//                        lcd_print('3');
-//                        numClick = 0; 
-//                    }
-//                    if (numClick == 7){ //4 clicks
-//                        lcd_print('4');
-//                        numClick = 0; 
-//                    }  
-//                    else {
-//                        numClick = 0;
-//                    }
-//                }
-//                else {
-//                    //not valid 
-//                }
-//            }
-//        }
-//        
-//        //letter complete
-//        if ((unsigned long int)(PR2 + 1) * overflow + TMR2 - validClick > 125000 ) {
-//            overflow = 0;
-//            TMR2 = 0;
-//            validClick = TMR2;
-//            prevEdge = TMR2;
-//            //get letter
-//            
-//            //send to lcd
-//            
-//            numClick = 0;
-//            isValidClick = 0;
-//            isFirstEdge = 1;
-//        }
-//    }
     return 0;
 }
