@@ -5,112 +5,115 @@ char morseCodeLib(const char s[]) {
     // Given an binary encoded morse character, this function will
     // return the associated character
     // This library handles A-Z, 0-9, and .,?
-        if (s == "01"){
+    
+    extern char letter[6];
+    
+        if (letter == "01NNNN"){
             return 'A';
         }
-        else if (s == "1000"){
+        else if (letter == "1000NN"){
             return 'B';
         }
-        else if (s == "1010"){
+        else if (letter == "1010NN"){
             return 'C';
         }
-        else if (s == "100"){
+        else if (letter == "100NNN"){
             return 'D';
         }
-        else if (s == "0"){
+        else if (letter == "0NNNNN"){
             return 'E';
         }
-        else if (s == "0010"){
+        else if (letter == "0010NN"){
             return 'F';
         }
-        else if (s == "110"){
+        else if (letter == "110NNN"){
             return 'G';
         }
-        else if (s == "0000"){
+        else if (letter == "0000NN"){
             return 'H';
         }
-        else if (s == "00"){
+        else if (letter == "00NNNN"){
             return 'I';
         }
-        else if (s == "0111"){
+        else if (letter == "0111NN"){
             return 'J';
         }
-        else if (s == "101"){
+        else if (letter == "101NNN"){
             return 'K';
         }
-        else if (s == "0100"){
+        else if (letter == "0100NN"){
             return 'L';
         }
-        else if (s == "11"){
+        else if (letter == "11NNNN"){
             return 'M';
         }
-        else if (s == "10"){
+        else if (letter == "10NNNN"){
             return 'N';
         }
-        else if (s == "111"){
+        else if (letter == "111NNN"){
             return 'O';
         }
-        else if (s == "0110"){
+        else if (letter == "0110NN"){
             return 'P';
         }
-        else if (s == "1101"){
+        else if (letter == "1101NN"){
             return 'Q';
         }
-        else if (s == "010"){
+        else if (letter == "010NN"){
             return 'R';
         }
-        else if (s == "000"){
+        else if (letter == "000NNN"){
             return 'S';
         }
-        else if (s == "1"){
+        else if (letter == "1NNNNN"){
             return 'T';
         }
-        else if (s == "001"){
+        else if (letter == "001NNN"){
             return 'U';
         }
-        else if (s == "0001"){
+        else if (letter == "0001NN"){
             return 'V';
         }
-        else if (s == "011"){
+        else if (letter == "011NNN"){
             return 'W';
         }
-        else if (s == "1001"){
+        else if (letter == "1001NN"){
             return 'X';
         }
-        else if (s == "1011"){
+        else if (letter == "1011NN"){
             return 'Y';
         }
-        else if (s == "1100"){
+        else if (letter == "1100NN"){
             return 'Z';
         }
-        else if (s == "0111"){
+        else if (letter == "0111NN"){
             return '1';
         }
-        else if (s == "00111"){
+        else if (letter == "00111N"){
             return '2';
         }
-        else if (s == "00011"){
+        else if (letter == "00011N"){
             return '3';
         }
-        else if (s == "00001"){
+        else if (letter == "00001N"){
             return '4';
         }
-        else if (s == "00000"){
+        else if (letter == "00000N"){
             return '5';
         }
-        else if (s == "10000"){
+        else if (letter == "10000N"){
             return '6';
         }
-        else if (s == "11000"){
+        else if (letter == "11000N"){
             return '7';
         }
-        else if (s == "11100"){
+        else if (letter == "11100N"){
             return '8';
         }
-        else if (s == "11110"){
+        else if (letter == "11110N"){
             return '9';
         }
-        else if (s == "11111"){
+        else if (s == "11111N"){
             return '0';
         }
         else if (s == "010101"){
