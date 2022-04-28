@@ -42,7 +42,7 @@ int main(void) {
     delay_ms(500); //need to wait at least 105 us (1/9600) before sending the first char
     
     while(1){
-        Nop();
+        
         buttonWatch();
         sendToBlu = morseCodeLib();
         lcd_setCursor(0,0);

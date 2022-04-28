@@ -1,6 +1,7 @@
 #include "xc.h"
 #include "MorseCodeLib.h"
 #include "Button.h"
+#include "string.h"
 
 extern int letter[6];
 
@@ -8,6 +9,7 @@ char morseCodeLib(void) {
     // Given an binary encoded morse character, this function will
     // return the associated character
     // This library handles A-Z, 0-9, and ?!.,;:+-/=
+ 
     
     if(letter[0] == 0){
         
@@ -654,9 +656,11 @@ char morseCodeLib(void) {
             }
         }
     }
-    char s[6] = {letter[0], letter[1], letter[2], letter[3], letter[4], letter[5]};
     
-//        if (!strcmp(s, "01NNNN")){
+  
+    
+
+//    if (!strcmp(s, "01NNNN")){
 //            return 'A';
 //        }
 //        else if (!strcmp(s, "1000NN")){

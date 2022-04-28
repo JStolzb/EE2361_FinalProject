@@ -3,7 +3,7 @@
 #include "string.h"
 #include "Button.h"
 
-extern unsigned long int overflow;
+extern unsigned long int overflow, buttonTimePressed;
 extern unsigned long int curPeriod, validClick, prevEdge;
 extern int numClick, isValidClick;
 
@@ -18,7 +18,7 @@ void buttonWatch(void) {
     numClick = 0;
     isValidClick = 0;
     int isFirstEdge = 1;
-    unsigned long int tempPeriod = 0, curEdge = 0;
+    unsigned long int tempPeriod = 0;
     
     for(i=0; i < 6; i++){
         letter[i] = 2;
@@ -29,32 +29,32 @@ void buttonWatch(void) {
     while(1) {
         if (isValidClick == 1) {
             isValidClick = 0;
-            curEdge = (unsigned long int) (PR2 + 1 )*overflow + TMR2;
-            curPeriod = curEdge - validClick; //update global var if greater than 2ms
+//            curEdge = (unsigned long int) (PR2 + 1 )*overflow + TMR2;
+//            curPeriod = curEdge - validClick; //update global var if greater than 2ms
 //            validClick = curEdge;
             numClick++;
             if (isFirstEdge == 1) {
                 isFirstEdge = 0;
             }
             else {
-                if (curPeriod < 44000) { //if less than 1 s
+                if (buttonTimePressed < 44000) { //if less than 1 s
                     //short click
                     //lcd_printChar('0');
                     letter[i]  = 0;
-                    isFirstEdge = 0;
+                    isFirstEdge = 1;
                     i++;
                 }
                 else {
                     //long click
                     //lcd_printChar('1');
                     letter[i]  = 1;
-                    isFirstEdge = 0;
+                    isFirstEdge = 1;
                     i++;
                 }
             }
-            validClick = curEdge;
+//            validClick = curEdge;
         }
-        if ((unsigned long int)(PR2 + 1) * overflow + TMR2 - validClick > 125000 ) {
+        if ((unsigned long int)(PR2 + 1) * overflow + TMR2 - prevEdge > 125000 ) {
             //end of letter
             //lcd_printChar('N');
             overflow = 0;
