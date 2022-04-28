@@ -46,4 +46,34 @@ void init_UART(void) {
 
 void sendChar(char c) {    // prints character to Adafruit app
     U1TXREG = c;
+    //delay_ms(1000);
+}
+
+void hello_world(void) {
+    sendChar('H');
+    delay_ms(100);
+    sendChar('e');
+    delay_ms(100);
+    sendChar('l');
+    delay_ms(100);
+    sendChar('l');
+    delay_ms(100);
+    sendChar('o');
+    delay_ms(100);
+    sendChar(' ');
+    delay_ms(100);
+    sendChar('W');
+    delay_ms(100);
+    sendChar('o');
+    delay_ms(100);
+    sendChar('r');
+    delay_ms(100);
+    sendChar('l');
+    delay_ms(100);
+    sendChar('d');
+    delay_ms(100);
+    sendChar('!');
+    delay_ms(100);
+    sendChar('\n');
+    
 }
