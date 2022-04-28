@@ -654,123 +654,123 @@ char morseCodeLib(void) {
             }
         }
     }
+    char s[6] = {letter[0], letter[1], letter[2], letter[3], letter[4], letter[5]};
     
-    
-//        if (!strcmp(letter, "01NNNN")){
+//        if (!strcmp(s, "01NNNN")){
 //            return 'A';
 //        }
-//        else if (!strcmp(letter, "1000NN")){
+//        else if (!strcmp(s, "1000NN")){
 //            return 'B';
 //        }
-//        else if (!strcmp(letter, "1010NN")){
+//        else if (!strcmp(s, "1010NN")){
 //            return 'C';
 //        }
-//        else if (!strcmp(letter, "100NNN")){
+//        else if (!strcmp(s, "100NNN")){
 //            return 'D';
 //        }
-//        else if (!strcmp(letter, "0NNNNN")){
+//        else if (!strcmp(s, "0NNNNN")){
 //            return 'E';
 //        }
-//        else if (!strcmp(letter, "0010NN")){
+//        else if (!strcmp(s, "0010NN")){
 //            return 'F';
 //        }
-//        else if (!strcmp(letter, "110NNN")){
+//        else if (!strcmp(s, "110NNN")){
 //            return 'G';
 //        }
-//        else if (!strcmp(letter, "0000NN")){
+//        else if (!strcmp(s, "0000NN")){
 //            return 'H';
 //        }
-//        else if (!strcmp(letter, "00NNNN")){
+//        else if (!strcmp(s, "00NNNN")){
 //            return 'I';
 //        }
-//        else if (!strcmp(letter, "0111NN")){
+//        else if (!strcmp(s, "0111NN")){
 //            return 'J';
 //        }
-//        else if (!strcmp(letter, "101NNN")){
+//        else if (!strcmp(s, "101NNN")){
 //            return 'K';
 //        }
-//        else if (!strcmp(letter, "0100NN")){
+//        else if (!strcmp(s, "0100NN")){
 //            return 'L';
 //        }
-//        else if (!strcmp(letter, "11NNNN")){
+//        else if (!strcmp(s, "11NNNN")){
 //            return 'M';
 //        }
-//        else if (!strcmp(letter, "10NNNN")){
+//        else if (!strcmp(s, "10NNNN")){
 //            return 'N';
 //        }
-//        else if (!strcmp(letter, "111NNN")){
+//        else if (!strcmp(s, "111NNN")){
 //            return 'O';
 //        }
-//        else if (!strcmp(letter, "0110NN")){
+//        else if (!strcmp(s, "0110NN")){
 //            return 'P';
 //        }
-//        else if (!strcmp(letter, "1101NN")){
+//        else if (!strcmp(s, "1101NN")){
 //            return 'Q';
 //        }
-//        else if (!strcmp(letter, "010NNN")){
+//        else if (!strcmp(s, "010NNN")){
 //            return 'R';
 //        }
-//        else if (!strcmp(letter, "000NNN")){
+//        else if (!strcmp(s, "000NNN")){
 //            return 'S';
 //        }
-//        else if (!strcmp(letter, "1NNNNN")){
+//        else if (!strcmp(s, "1NNNNN")){
 //            return 'T';
 //        }
-//        else if (!strcmp(letter, "001NNN")){
+//        else if (!strcmp(s, "001NNN")){
 //            return 'U';
 //        }
-//        else if (!strcmp(letter, "0001NN")){
+//        else if (!strcmp(s, "0001NN")){
 //            return 'V';
 //        }
-//        else if (!strcmp(letter, "011NNN")){
+//        else if (!strcmp(s, "011NNN")){
 //            return 'W';
 //        }
-//        else if (!strcmp(letter, "1001NN")){
+//        else if (!strcmp(s, "1001NN")){
 //            return 'X';
 //        }
-//        else if (!strcmp(letter, "1011NN")){
+//        else if (!strcmp(s, "1011NN")){
 //            return 'Y';
 //        }
-//        else if (!strcmp(letter, "1100NN")){
+//        else if (!strcmp(s, "1100NN")){
 //            return 'Z';
 //        }
-//        else if (!strcmp(letter, "0111NN")){
+//        else if (!strcmp(s, "0111NN")){
 //            return '1';
 //        }
-//        else if (!strcmp(letter, "00111N")){
+//        else if (!strcmp(s, "00111N")){
 //            return '2';
 //        }
-//        else if (!strcmp(letter, "00011N")){
+//        else if (!strcmp(s, "00011N")){
 //            return '3';
 //        }
-//        else if (!strcmp(letter, "00001N")){
+//        else if (!strcmp(s, "00001N")){
 //            return '4';
 //        }
-//        else if (!strcmp(letter, "00000N")){
+//        else if (!strcmp(s, "00000N")){
 //            return '5';
 //        }
-//        else if (!strcmp(letter, "10000N")){
+//        else if (!strcmp(s, "10000N")){
 //            return '6';
 //        }
-//        else if (!strcmp(letter, "11000N")){
+//        else if (!strcmp(s, "11000N")){
 //            return '7';
 //        }
-//        else if (!strcmp(letter, "11100N")){
+//        else if (!strcmp(s, "11100N")){
 //            return '8';
 //        }
-//        else if (!strcmp(letter, "11110N")){
+//        else if (!strcmp(s, "11110N")){
 //            return '9';
 //        }
-//        else if (!strcmp(letter, "11111N")){
+//        else if (!strcmp(s, "11111N")){
 //            return '0';
 //        }
-//        else if (!strcmp(letter, "010101")){
+//        else if (!strcmp(s, "010101")){
 //            return '.';
 //        }
-//        else if (!strcmp(letter, "110011")){
+//        else if (!strcmp(s, "110011")){
 //            return ',';
 //        }
-//        else if (!strcmp(letter, "001100")){
+//        else if (!strcmp(s, "001100")){
 //            return '?';
 //        }
 //        else{
