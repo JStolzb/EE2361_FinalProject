@@ -24,7 +24,7 @@
 #pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 
 
-extern char letter[6];
+extern int letter[6];
 
 void pic24Init(void) { // initializes the PIC
     _RCDIV = 0; // sets frequency of 16 MHz
@@ -39,20 +39,17 @@ int main(void) {
     
     char sendToBlu = '0';
     
+    delay_ms(500); //need to wait at least 105 us (1/9600) before sending the first char
+    
     while(1){
         Nop();
         buttonWatch();
-        Nop();
         sendToBlu = morseCodeLib();
-        Nop();
-        //sendToBlu = 'h';
         lcd_setCursor(0,0);
         lcd_printChar(sendToBlu);
         
-        U1TXREG = sendToBlu;
+        sendChar(sendToBlu);
         delay_ms(1000);
-        U1TXREG = 0x0D;
-        U1TXREG = 0x0A;
     }
     return 0;
 }

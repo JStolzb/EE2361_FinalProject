@@ -7,7 +7,7 @@ extern unsigned long int overflow;
 extern unsigned long int curPeriod, validClick, prevEdge;
 extern int numClick, isValidClick;
 
-char letter[6];
+int letter[6];
 int i;
 
 void buttonWatch(void) {
@@ -21,7 +21,7 @@ void buttonWatch(void) {
     unsigned long int tempPeriod = 0, curEdge = 0;
     
     for(i=0; i < 6; i++){
-        letter[i] = 'N';
+        letter[i] = 2;
     }
     
     i = 0;
@@ -40,14 +40,14 @@ void buttonWatch(void) {
                 if (curPeriod < 44000) { //if less than 1 s
                     //short click
                     //lcd_printChar('0');
-                    letter[i]  = '0';
+                    letter[i]  = 0;
                     isFirstEdge = 0;
                     i++;
                 }
                 else {
                     //long click
                     //lcd_printChar('1');
-                    letter[i]  = '1';
+                    letter[i]  = 1;
                     isFirstEdge = 0;
                     i++;
                 }
