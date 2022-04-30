@@ -1,5 +1,7 @@
 #include "xc.h"
-#include "LCD.h"
+#include "LCD_lib.h"
+#include "Button_Library.h"
+
 // CW1: FLASH CONFIGURATION WORD 1 (see PIC24 Family Reference Manual 24.1)
 #pragma config ICS = PGx1          // Comm Channel Select (Emulator EMUC1/EMUD1 pins are shared with PGC1/PGD1)
 #pragma config FWDTEN = OFF        // Watchdog Timer Enable (Watchdog Timer is disabled)
@@ -24,21 +26,12 @@ volatile unsigned long int dutyCycle = 0;
 volatile char letter[6];
 volatile int posEdge = 0;
 
-
-void setup(void){
-    CLKDIVbits.RCDIV = 0;                       //Set RCDIV=1:1 (default 2:1) 32MHz or FCY/2=16M
-    _CN22PUE = 1;                               //set the pull-up resistor for pin 17
-    _TRISB8 = 1;                                //Sets RB8 to an input
-    AD1PCFG = 0xFFFF;                           //sets all pins to digital I/O
+void initPushButton(void){
     
     I2C2CONbits.I2CEN = 0;
     I2C2BRG = 0x9D; 
     I2C2CONbits.I2CEN = 1;
     IFS3bits.MI2C2IF = 0;
-    
-}
-
-void initPushButton(void){
     
     T2CON = 0x0030;                             //Stop Timer, Tcy clk input, PRE 1:256
     TMR2 = 0;                                   // Initialize to zero (also best practice)
@@ -66,20 +59,9 @@ void initPushButton(void){
 
 void __attribute__((interrupt, auto_psv)) _IC1Interrupt(void){
     _IC1IF = 0;
-    
-//    posEdge = _RB8;
-//    if(posEdge == 1){
-//        TMR2 = 0;
-//        overflow = 0;
-//    }
-//    else if(posEdge == 0){
-//        dutyCycle = (unsigned long)TMR2 + (unsigned long)((PR2+1) * overflow);
-//    }
 
     TMR2 = 0;
     overflow = 0;
-    
-//    delay(5);
 }
 
 void __attribute__((interrupt, auto_psv)) _IC2Interrupt(void){
@@ -88,8 +70,6 @@ void __attribute__((interrupt, auto_psv)) _IC2Interrupt(void){
     if ((TMR2 + (unsigned long)((PR2+1) * overflow)) > 325){
         dutyCycle = (TMR2 + (unsigned long)((PR2+1) * overflow));
     }
-    
-//    delay(5);
     
 }
 
