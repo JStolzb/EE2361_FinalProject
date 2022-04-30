@@ -26,7 +26,8 @@ extern int letter[6];
 
 void pic24Init(void) { // initializes the PIC
     _RCDIV = 0; // sets frequency of 16 MHz
-    AD1PCFG = 0x9fff;   // sets all pins digital
+    AD1PCFG = 0xFFFF;
+    
 }
 
 int main(void) {
