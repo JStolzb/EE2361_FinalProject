@@ -1,8 +1,7 @@
 
 #include "xc.h"
 #include "string.h"
-#include "Button.h"
-#include "ButtonLibrary.h"
+#include "Button_Library.h"
 #include "MorseCodeLib.h"
 #include "LCD_Lib.h"
 #include "UART_Adafruit.h"
@@ -33,7 +32,7 @@ void pic24Init(void) { // initializes the PIC
 
 int main(void) {
     pic24Init();
-    init_button();
+    initPushButton();
     lcd_init();
     init_UART();
     

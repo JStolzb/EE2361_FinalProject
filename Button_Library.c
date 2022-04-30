@@ -102,35 +102,9 @@ void buttonWatch(void){
             overflow = 0;
         }
 
-        if(((TMR2 + (unsigned long)((PR2+1) * overflow))) >= (2 * 62500)){    //1 sec
+        if(((TMR2 + (unsigned long)((PR2+1) * overflow))) >= (2 * 62500)){  //2 sec
             dutyCycle = 0;
             break;
         }
     }
-}
-
-int main(void) {
-    setup();
-    lcdinit();
-    initPushButton();
-    
-    while(1){
-        
-        buttonWatch();
-        
-        setCursour(0,0);
-        lcdPrintChar(letter[0]);
-        delay(50);
-        lcdPrintChar(letter[1]);
-        delay(50);
-        lcdPrintChar(letter[2]);
-        delay(50);
-        lcdPrintChar(letter[3]);
-        delay(50);
-        lcdPrintChar(letter[4]);
-        delay(50);
-        lcdPrintChar(letter[5]);
-        delay(1000);
-    }
-    return 0;
 }
