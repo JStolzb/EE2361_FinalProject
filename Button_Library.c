@@ -2,7 +2,6 @@
 #include "LCD_lib.h"
 #include "Button_Library.h"
 
-<<<<<<< HEAD
 /*// CW1: FLASH CONFIGURATION WORD 1 (see PIC24 Family Reference Manual 24.1)
 #pragma config ICS = PGx1          // Comm Channel Select (Emulator EMUC1/EMUD1 pins are shared with PGC1/PGD1)
 #pragma config FWDTEN = OFF        // Watchdog Timer Enable (Watchdog Timer is disabled)

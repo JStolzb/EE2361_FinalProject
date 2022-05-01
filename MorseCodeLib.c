@@ -8,6 +8,8 @@ char morseCodeLib(void) {
     // Given an binary encoded morse character, this function will
     // return the associated character
     // This library handles A-Z, 0-9, and ?!.,;:+-/=
+    
+    // Logic blocks commented out represent possible morse code combinations
  
     
     if(letter[0] == 0){

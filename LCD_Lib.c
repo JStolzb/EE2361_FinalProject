@@ -162,13 +162,7 @@ void lcd_printWrappedStr(const char s[], int length) {
 }
 
 char int_to_char(int num) { // converts the int in letter to values in binary
-    if (num == 0) {
-        return '0';
-    } else if (num == 1) {
-        return '1';
-    } else if (num == 2) {
-        return 'N';
-    }
+    return (num + '0');
 }
 
 void print_binary_code_to_lcd(void) {   // prints the binary string to the LCD
