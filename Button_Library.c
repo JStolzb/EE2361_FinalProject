@@ -18,15 +18,16 @@
                                        // Fail-Safe Clock Monitor is enabled)
 #pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))*/
 
-#define dot 31250
+#define dot 31250 // .5 seconds
 #define dash 62499
 
 volatile unsigned long int overflow = 0;
 volatile unsigned long int dutyCycle = 0;
-volatile int letter[6];
+int letter[6];
 volatile int posEdge = 0;
 
 void initPushButton(void){
+    /* Initializes the button, pull up resistor, IC1, IC2, and TMR2 */
     TRISBbits.TRISB8 = 1;   // RB8 input connected to button
     _CN22PUE = 1;   // pull-up resistor on RB8
     
@@ -60,6 +61,9 @@ void initPushButton(void){
 }
 
 void __attribute__((interrupt, auto_psv)) _IC1Interrupt(void){
+      /* IC1 interrupt will trigger on each rising edge and sets
+     TM2 and overflow to 0 for duty cycle calculation */
+    
     _IC1IF = 0;
 
     TMR2 = 0;
@@ -67,6 +71,10 @@ void __attribute__((interrupt, auto_psv)) _IC1Interrupt(void){
 }
 
 void __attribute__((interrupt, auto_psv)) _IC2Interrupt(void){
+    /* IC2 interrupt will trigger on each falling edge and, after 
+     accounting for debouncing, will calculate the duty cycle (i.e.
+     the time that the button is pressed) */
+    
     _IC2IF = 0;
     
     if ((TMR2 + (unsigned long)((PR2+1) * overflow)) > 325){
@@ -76,12 +84,27 @@ void __attribute__((interrupt, auto_psv)) _IC2Interrupt(void){
 }
 
 void __attribute__((interrupt, auto_psv)) _T2Interrupt(void){
+    /* T2 interrupt simply keeps track of timer overflow */
+    
     _T2IF = 0;
     overflow++;
 }
 
 void buttonWatch(void){
+    /* 
+     buttonWatch handles the dot and dash interpretation, where dots are 0
+     and dashes are 1. Dots are considered anything below the defined value
+     seen in "dot" and dashes are considered anything larger than the dot time.
+     
+     buttonWatch will fill an external variable letter which is an int array 
+     initially filled with all 2's, representing no dots or dashes yet.
+     
+     This int array will then be used by the morse code library to convert the 
+     binary messages to characters.
+     */
        
+    
+    // Initialize letter
     int i;
     for(i=0;i<6;i++){
         letter[i] = 2;
@@ -89,21 +112,24 @@ void buttonWatch(void){
     i = 0;
     
     while(1){
-        if(dutyCycle <= dot && dutyCycle > 325){     //.25 sec
+        // This represents a dot, making sure duty cycle isn't too short as well
+        if(dutyCycle <= dot && dutyCycle > 325){     // < .5 sec
             letter[i] = 0;
             i++;
             dutyCycle = 0;
             TMR2 = 0;
             overflow = 0;
         }
-        else if(dutyCycle > dot){       //.75 sec
+        // This represents a dash
+        else if(dutyCycle > dot){       // > .5 sec
             letter[i] = 1;
             i++;
             dutyCycle = 0;
             TMR2 = 0;
             overflow = 0;
         }
-
+        // If the timer is too large, it means that the user is done with this
+        // character and letter needs to be sent to morse code lib for interpretation
         if(((TMR2 + (unsigned long)((PR2+1) * overflow))) >= (2 * 62500)){  //2 sec
             dutyCycle = 0;
             break;
