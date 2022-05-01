@@ -3,10 +3,12 @@
 #include "UART_Adafruit.h"
 
 void __attribute__((__interrupt__,__auto_psv__)) _U1TXInterrupt(void) {
+    /* UART interrupt */
     _U1TXIF = 0;
 }
 
 void delay_ms(unsigned int ms) {
+    /* Generic delay function */
     while (ms-- > 0) {
         asm("repeat #15998");
         asm("nop");
@@ -18,6 +20,7 @@ void sendChar(char c) {    // prints character to Adafruit app
  }
 
 void init_UART(void) {
+    /* Initialize UART for the bluetooth module */
     _TRISB6 = 0;  // U1TX output
     _TRISB10 = 1; // U1RX input
     
