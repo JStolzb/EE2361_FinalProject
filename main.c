@@ -30,16 +30,12 @@ void pic24Init(void) { // initializes the PIC
 }
 
 char int_to_char(int num) {
-    if (num == 0) {
-        return '0';
-    } else if (num == 1) {
-        return '1';
-    } else if (num == 2) {
-        return 'N';
-    }
+    // Converts an int 0-9 into a char
+    return (num + '0');
 }
 
 void print_binary_code_to_lcd() {
+    // Prints the binary morse code to LCD display for debugging purposes
     lcd_printChar(int_to_char(letter[0]));
     delay_ms(50);
     lcd_printChar(int_to_char(letter[1]));
