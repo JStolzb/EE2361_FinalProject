@@ -29,6 +29,31 @@ void pic24Init(void) { // initializes the PIC
     AD1PCFG = 0x9fff;   // sets all pins digital
 }
 
+char int_to_char(int num) {
+    if (num == 0) {
+        return '0';
+    } else if (num == 1) {
+        return '1';
+    } else if (num == 2) {
+        return 'N';
+    }
+}
+
+void print_binary_code_to_lcd() {
+    lcd_printChar(int_to_char(letter[0]));
+    delay_ms(50);
+    lcd_printChar(int_to_char(letter[1]));
+    delay_ms(50);
+    lcd_printChar(int_to_char(letter[2]));
+    delay_ms(50);
+    lcd_printChar(int_to_char(letter[3]));
+    delay_ms(50);
+    lcd_printChar(int_to_char(letter[4]));
+    delay_ms(50);
+    lcd_printChar(int_to_char(letter[5]));
+    delay_ms(50);
+}
+
 int main(void) {
     pic24Init();
     initPushButton();
@@ -44,7 +69,8 @@ int main(void) {
         buttonWatch();
         sendToBlu = morseCodeLib();
         lcd_setCursor(0,0);
-        lcd_printChar(sendToBlu);
+//        lcd_printChar(sendToBlu);
+        print_binary_code_to_lcd();
         
         sendChar(sendToBlu);
         delay_ms(1000);
