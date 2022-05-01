@@ -29,43 +29,24 @@ void pic24Init(void) { // initializes the PIC
     AD1PCFG = 0x9fff;   // sets all pins digital
 }
 
-char int_to_char(int num) {
-    // Converts an int 0-9 into a char
-    return (num + '0');
-}
-
-void print_binary_code_to_lcd() {
-    // Prints the binary morse code to LCD display for debugging purposes
-    lcd_printChar(int_to_char(letter[0]));
-    delay_ms(50);
-    lcd_printChar(int_to_char(letter[1]));
-    delay_ms(50);
-    lcd_printChar(int_to_char(letter[2]));
-    delay_ms(50);
-    lcd_printChar(int_to_char(letter[3]));
-    delay_ms(50);
-    lcd_printChar(int_to_char(letter[4]));
-    delay_ms(50);
-    lcd_printChar(int_to_char(letter[5]));
-    delay_ms(50);
-}
-
 int main(void) {
     pic24Init();
     initPushButton();
     lcd_init();
     init_UART();
     
-    char sendToBlu = '0';
+    char sendToBlu = '0';   // initializes character that will be sent to the Bluefruit
     
     delay_ms(500); //need to wait at least 105 us (1/9600) before sending the first char
+    //lcd_setCursor(0,0);
+    
     
     while(1){
         
         buttonWatch();
         sendToBlu = morseCodeLib();
         lcd_setCursor(0,0);
-//        lcd_printChar(sendToBlu);
+        //lcd_printChar(sendToBlu);
         print_binary_code_to_lcd();
         
         sendChar(sendToBlu);
