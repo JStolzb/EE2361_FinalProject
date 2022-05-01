@@ -2,6 +2,8 @@
 #include "xc.h"
 #include "LCD_Lib.h"
 
+extern int letter[6];
+
 void delay(unsigned int ms) {
     while (ms-- > 0) {
         asm("repeat #15998");
@@ -157,4 +159,29 @@ void lcd_printWrappedStr(const char s[], int length) {
         lcd_printStr(s, length);
     }
     
+}
+
+char int_to_char(int num) { // converts the int in letter to values in binary
+    if (num == 0) {
+        return '0';
+    } else if (num == 1) {
+        return '1';
+    } else if (num == 2) {
+        return 'N';
+    }
+}
+
+void print_binary_code_to_lcd(void) {   // prints the binary string to the LCD
+    lcd_printChar(int_to_char(letter[0]));
+    delay_ms(50);
+    lcd_printChar(int_to_char(letter[1]));
+    delay_ms(50);
+    lcd_printChar(int_to_char(letter[2]));
+    delay_ms(50);
+    lcd_printChar(int_to_char(letter[3]));
+    delay_ms(50);
+    lcd_printChar(int_to_char(letter[4]));
+    delay_ms(50);
+    lcd_printChar(int_to_char(letter[5]));
+    delay_ms(50);
 }

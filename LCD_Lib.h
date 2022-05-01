@@ -18,6 +18,8 @@ extern "C" {
     void lcd_printStr(const char s[], int length);
     void lcd_setCursor(char x, char y);
     void lcd_printWrappedStr(const char s[], int length);
+    char int_to_char(int num);
+    void print_binary_code_to_lcd(void);
 
 
 #ifdef	__cplusplus
