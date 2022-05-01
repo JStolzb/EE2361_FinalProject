@@ -66,7 +66,7 @@ can either show the character returned from the morse code interpretation or the
   * Initializes the PIC24 (16 MHz frequency and digital I/O)
 
 
-## Examples on how to use this project
+## Project Usage
 
 ### Basic Usage
 To test the basic usage of this project, a long click and a short click can be tested. First, the should click (less than 0.5s) would be inputted into the system and the letter ‘E’ would be sent to the bluetooth module. For a long click, the button must be held for longer than 0.5s and then the letter ‘T’ will be sent to the bluetooth. 
